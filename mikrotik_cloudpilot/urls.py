@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.schemas import get_schema_view
-from rest_framework.renderers import JSONOpenAPIRenderer
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import serve_docs, docs_home
 
 
 schema_title = "Mikrotik CloudPilot API"
@@ -28,16 +29,11 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('routers/', include('routers.urls')),
     path('payments/', include('payments.urls')),
-    # OpenAPI schema endpoint (JSON)
-    path(
-        'openapi.json',
-        get_schema_view(
-            title=schema_title,
-            description=schema_description,
-            version='1.0.0',
-            public=True,
-            renderer_classes=[JSONOpenAPIRenderer],
-        ),
-        name='openapi-json',
-    ),
+    # Documentation routes
+    path('docs/', docs_home, name='docs_home'),
+    path('docs/<path:path>', serve_docs, name='serve_docs'),
 ]
+
+# Serve static files in development
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,2627 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://localhost:8001/mikrotik-integration/">
+      
+      
+        <link rel="prev" href="../kopokopo-payments/">
+      
+      
+        <link rel="next" href="../api-reference/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Mikrotik Integration - Mikrotik CloudPilot API Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mikrotik-integration-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mikrotik CloudPilot API Docs" class="md-header__button md-logo" aria-label="Mikrotik CloudPilot API Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mikrotik CloudPilot API Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mikrotik Integration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mikrotik CloudPilot API Docs" class="md-nav__button md-logo" aria-label="Mikrotik CloudPilot API Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Mikrotik CloudPilot API Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Setup Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Authentication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Routers API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Routers API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../router-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Router API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Package Management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Payments API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Payments API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-credentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Payment Credentials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-transactions.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Payment Transactions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intasend-payments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    IntaSend Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kopokopo-payments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KopoKopo Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Mikrotik Integration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mikrotik Integration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-basic-login-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Basic Login Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-enhanced-login-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enhanced Login Page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mikrotik-login-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mikrotik Login Pages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mikrotik Login Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-login-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Login Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-the-login-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing the Login Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Instructions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-configure-the-login-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Configure the Login Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-upload-to-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Upload to Mikrotik
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2: Upload to Mikrotik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-direct-file-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option A: Direct File Upload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-web-server-hosting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option B: Web Server Hosting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-configure-mikrotik-hotspot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Configure Mikrotik Hotspot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Configure Mikrotik Hotspot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-hotspot-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Hotspot Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-login-page-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Login Page Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-hotspot-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Hotspot Settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-configure-dns-and-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Configure DNS and Network
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Configure DNS and Network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-information-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Information Detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Client Information Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-detection-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Detection Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Automatic Detection Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-url-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. URL Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mikrotik-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Mikrotik Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-custom-url-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Custom URL Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fallback-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fallback Detection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Package Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Packages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Packages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-database-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package-Database Synchronization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-flow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Flow Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Flow Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-payment-initiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Payment Initiation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-status-polling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Status Polling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-auto-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Auto-Login
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jwt-token-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. JWT Token Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. JWT Token Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-server-side-token-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option A: Server-Side Token Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-session-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option B: Session-Based Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-ip-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option C: IP-Based Authentication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-https-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. HTTPS Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rate Limiting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing and Debugging
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing and Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-debug-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Debug Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-console-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Console Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-network-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Network Tab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Common Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-not-initiating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Not Initiating
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-info-not-detected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Info Not Detected
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-login-not-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Login Not Working
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Production Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-file-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. File Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-security-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Security Hardening
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-backup-and-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Backup and Recovery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-custom-branding" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Custom Branding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-language-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Multi-Language Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-analytics-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Analytics Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-and-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support and Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Support and Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-common-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Common Questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Getting Help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-updates-and-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Updates and Maintenance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-basic-login-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Basic Login Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-enhanced-login-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Enhanced Login Page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mikrotik-login-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mikrotik Login Pages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mikrotik Login Pages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-login-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Login Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-the-login-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing the Login Pages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup Instructions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setup Instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-configure-the-login-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Configure the Login Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-upload-to-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Upload to Mikrotik
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 2: Upload to Mikrotik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-direct-file-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option A: Direct File Upload
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-web-server-hosting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option B: Web Server Hosting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-configure-mikrotik-hotspot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Configure Mikrotik Hotspot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 3: Configure Mikrotik Hotspot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-hotspot-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Hotspot Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-login-page-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Login Page Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-hotspot-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Hotspot Settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-configure-dns-and-network" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Configure DNS and Network
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Configure DNS and Network">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      DNS Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#client-information-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Information Detection
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Client Information Detection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-detection-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Automatic Detection Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Automatic Detection Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-url-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. URL Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mikrotik-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Mikrotik Variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-custom-url-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Custom URL Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fallback-detection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fallback Detection
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Package Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Default Packages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customizing-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing Packages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#package-database-synchronization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Package-Database Synchronization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-flow-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Flow Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment Flow Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-payment-initiation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Payment Initiation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-status-polling" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Status Polling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-auto-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Auto-Login
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-jwt-token-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. JWT Token Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. JWT Token Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-a-server-side-token-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option A: Server-Side Token Generation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-b-session-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option B: Session-Based Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-c-ip-based-authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option C: IP-Based Authentication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-https-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. HTTPS Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rate-limiting" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Rate Limiting
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing and Debugging
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing and Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-debug-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Debug Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-console-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Console Logging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-network-tab" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Network Tab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Common Issues
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Common Issues">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-not-initiating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Not Initiating
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-info-not-detected" class="md-nav__link">
+    <span class="md-ellipsis">
+      Client Info Not Detected
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-login-not-working" class="md-nav__link">
+    <span class="md-ellipsis">
+      Auto-Login Not Working
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#production-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Production Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-file-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. File Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-security-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Security Hardening
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-backup-and-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Backup and Recovery
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-custom-branding" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Custom Branding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-language-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Multi-Language Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-analytics-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Analytics Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-and-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support and Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Support and Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-common-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Common Questions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-getting-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Getting Help
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-updates-and-maintenance" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Updates and Maintenance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="mikrotik-integration-guide">Mikrotik Integration Guide<a class="headerlink" href="#mikrotik-integration-guide" title="Permanent link">&para;</a></h1>
+<p>This guide explains how to integrate the IntaSend payment system with Mikrotik hotspot for automatic WiFi access after payment.</p>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The Mikrotik integration provides a seamless payment-to-access flow:</p>
+<ol>
+<li><strong>User connects to WiFi</strong> → Redirected to login page</li>
+<li><strong>Selects package</strong> → Chooses duration and price</li>
+<li><strong>Enters phone number</strong> → M-Pesa STK push initiated</li>
+<li><strong>Completes payment</strong> → IntaSend confirms payment</li>
+<li><strong>Auto-login</strong> → User automatically connected to WiFi</li>
+<li><strong>Package activation</strong> → Access granted for selected duration</li>
+</ol>
+<h2 id="files">Files<a class="headerlink" href="#files" title="Permanent link">&para;</a></h2>
+<h3 id="1-basic-login-page">1. Basic Login Page<a class="headerlink" href="#1-basic-login-page" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>File</strong>: <code>static/mikrotik-login.html</code></li>
+<li><strong>Use Case</strong>: Simple integration with basic client detection</li>
+<li><strong>Features</strong>: Package selection, phone input, payment processing</li>
+</ul>
+<h3 id="2-enhanced-login-page">2. Enhanced Login Page<a class="headerlink" href="#2-enhanced-login-page" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>File</strong>: <code>static/mikrotik-login-enhanced.html</code></li>
+<li><strong>Use Case</strong>: Advanced integration with detailed client information</li>
+<li><strong>Features</strong>: Client IP/MAC detection, debug logging, enhanced Mikrotik integration</li>
+</ul>
+<h2 id="mikrotik-login-pages">Mikrotik Login Pages<a class="headerlink" href="#mikrotik-login-pages" title="Permanent link">&para;</a></h2>
+<p>The system provides two pre-configured login pages that can be served directly from Django to avoid CORS issues:</p>
+<h3 id="available-login-pages">Available Login Pages<a class="headerlink" href="#available-login-pages" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Basic Login Page</strong>: <code>/api/payments/mikrotik-login/</code></li>
+<li>Simple package selection and payment flow</li>
+<li>Basic client information detection</li>
+<li>
+<p>Suitable for most Mikrotik setups</p>
+</li>
+<li>
+<p><strong>Enhanced Login Page</strong>: <code>/api/payments/mikrotik-login-enhanced/</code></p>
+</li>
+<li>Advanced client information detection</li>
+<li>Debug logging and detailed error handling</li>
+<li>Better integration with Mikrotik parameters</li>
+</ol>
+<h3 id="accessing-the-login-pages">Accessing the Login Pages<a class="headerlink" href="#accessing-the-login-pages" title="Permanent link">&para;</a></h3>
+<p>Instead of opening the HTML files directly in your browser (which causes CORS issues), access them through Django:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic login page</span>
+http://yourdomain.com/api/payments/mikrotik-login/
+
+<span class="c1"># Enhanced login page  </span>
+http://yourdomain.com/api/payments/mikrotik-login-enhanced/
+</code></pre></div>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p>The login pages are automatically configured with:
+- Your public API key
+- Relative API paths (no CORS issues)
+- Default router ID (update in the view if needed)</p>
+<h3 id="customization">Customization<a class="headerlink" href="#customization" title="Permanent link">&para;</a></h3>
+<p>To customize the login pages:
+1. Edit the HTML files in the <code>static/</code> directory
+2. Update the <code>mikrotik_login_page()</code> and <code>mikrotik_login_enhanced()</code> views in <code>payments/views.py</code>
+3. Restart Django to see changes</p>
+<h2 id="setup-instructions">Setup Instructions<a class="headerlink" href="#setup-instructions" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-configure-the-login-page">Step 1: Configure the Login Page<a class="headerlink" href="#step-1-configure-the-login-page" title="Permanent link">&para;</a></h3>
+<p>Update the configuration variables in your chosen HTML file:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Configuration - Update these values</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">API_BASE_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;https://yourdomain.com/api&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Your Django API domain</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">ROUTER_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Your router ID from the database</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">JWT_TOKEN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;your_jwt_token&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Valid JWT token for API access</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">SHOW_DEBUG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// Set to false in production</span>
+</code></pre></div>
+<p><strong>Required Updates:</strong>
+- <code>API_BASE_URL</code>: Your Django server domain (e.g., <code>https://api.guntu.net</code>)
+- <code>ROUTER_ID</code>: The router ID from your database
+- <code>JWT_TOKEN</code>: A valid JWT token with payment permissions</p>
+<h3 id="step-2-upload-to-mikrotik">Step 2: Upload to Mikrotik<a class="headerlink" href="#step-2-upload-to-mikrotik" title="Permanent link">&para;</a></h3>
+<h4 id="option-a-direct-file-upload">Option A: Direct File Upload<a class="headerlink" href="#option-a-direct-file-upload" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Access your Mikrotik router via WinBox or SSH</li>
+<li>Go to <strong>Files</strong> → <strong>Upload</strong> the HTML file</li>
+<li>Note the file path (e.g., <code>/mikrotik-login.html</code>)</li>
+</ol>
+<h4 id="option-b-web-server-hosting">Option B: Web Server Hosting<a class="headerlink" href="#option-b-web-server-hosting" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Host the HTML file on your web server</li>
+<li>Ensure it's accessible via HTTPS</li>
+<li>Note the full URL</li>
+</ol>
+<h3 id="step-3-configure-mikrotik-hotspot">Step 3: Configure Mikrotik Hotspot<a class="headerlink" href="#step-3-configure-mikrotik-hotspot" title="Permanent link">&para;</a></h3>
+<h4 id="basic-hotspot-configuration">Basic Hotspot Configuration<a class="headerlink" href="#basic-hotspot-configuration" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Enable hotspot</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>setup
+
+<span class="c1"># Set hotspot profile</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>default<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>hotspot-address<span class="o">=</span><span class="m">192</span>.168.1.0/24<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>dns-name<span class="o">=</span>hotspot.guntu.net<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>login-cookie<span class="o">=</span>hotspot
+
+<span class="c1"># Configure hotspot server</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>server<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">address</span><span class="o">=</span><span class="m">192</span>.168.1.1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">profile</span><span class="o">=</span>default<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>idle-timeout<span class="o">=</span>5m<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>keepalive-timeout<span class="o">=</span>2m<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>login-timeout<span class="o">=</span>1m
+</code></pre></div>
+<h4 id="custom-login-page-configuration">Custom Login Page Configuration<a class="headerlink" href="#custom-login-page-configuration" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Set custom login page</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>default<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>login-page<span class="o">=</span>/mikrotik-login.html
+
+<span class="c1"># Or for external hosting</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>default<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>login-page<span class="o">=</span>https://yourdomain.com/mikrotik-login.html
+</code></pre></div>
+<h4 id="advanced-hotspot-settings">Advanced Hotspot Settings<a class="headerlink" href="#advanced-hotspot-settings" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configure user profiles</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>user<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>1hour<span class="w"> </span>rate-limit<span class="o">=</span>1M/1M
+/ip<span class="w"> </span>hotspot<span class="w"> </span>user<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>3hours<span class="w"> </span>rate-limit<span class="o">=</span>2M/2M
+/ip<span class="w"> </span>hotspot<span class="w"> </span>user<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>24hours<span class="w"> </span>rate-limit<span class="o">=</span>5M/5M
+
+<span class="c1"># Set session timeout</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>user<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>1hour<span class="o">]</span><span class="w"> </span>session-timeout<span class="o">=</span><span class="m">1</span>:00:00
+/ip<span class="w"> </span>hotspot<span class="w"> </span>user<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>3hours<span class="o">]</span><span class="w"> </span>session-timeout<span class="o">=</span><span class="m">3</span>:00:00
+/ip<span class="w"> </span>hotspot<span class="w"> </span>user<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>24hours<span class="o">]</span><span class="w"> </span>session-timeout<span class="o">=</span><span class="m">24</span>:00:00
+</code></pre></div>
+<h3 id="step-4-configure-dns-and-network">Step 4: Configure DNS and Network<a class="headerlink" href="#step-4-configure-dns-and-network" title="Permanent link">&para;</a></h3>
+<h4 id="dns-configuration">DNS Configuration<a class="headerlink" href="#dns-configuration" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add DNS entry for hotspot</span>
+/ip<span class="w"> </span>dns<span class="w"> </span>static<span class="w"> </span>add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>hotspot.guntu.net<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">192</span>.168.1.1
+
+<span class="c1"># Configure DNS servers for clients</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>default<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>dns-server<span class="o">=</span><span class="m">8</span>.8.8.8,8.8.4.4
+</code></pre></div>
+<h4 id="network-configuration">Network Configuration<a class="headerlink" href="#network-configuration" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configure hotspot interface</span>
+/interface<span class="w"> </span>bridge<span class="w"> </span>add<span class="w"> </span><span class="nv">name</span><span class="o">=</span>hotspot-bridge
+/ip<span class="w"> </span>address<span class="w"> </span>add<span class="w"> </span><span class="nv">address</span><span class="o">=</span><span class="m">192</span>.168.1.1/24<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>hotspot-bridge
+
+<span class="c1"># Add wireless interface to bridge</span>
+/interface<span class="w"> </span>bridge<span class="w"> </span>port<span class="w"> </span>add<span class="w"> </span><span class="nv">bridge</span><span class="o">=</span>hotspot-bridge<span class="w"> </span><span class="nv">interface</span><span class="o">=</span>wlan1
+</code></pre></div>
+<h2 id="client-information-detection">Client Information Detection<a class="headerlink" href="#client-information-detection" title="Permanent link">&para;</a></h2>
+<h3 id="automatic-detection-methods">Automatic Detection Methods<a class="headerlink" href="#automatic-detection-methods" title="Permanent link">&para;</a></h3>
+<p>The enhanced login page automatically detects client information:</p>
+<h4 id="1-url-parameters">1. URL Parameters<a class="headerlink" href="#1-url-parameters" title="Permanent link">&para;</a></h4>
+<p>Mikrotik can pass client information via URL parameters:</p>
+<div class="highlight"><pre><span></span><code>https://hotspot.guntu.net/login?ip=192.168.1.100&amp;mac=AA:BB:CC:DD:EE:FF&amp;router=AP1
+</code></pre></div>
+<h4 id="2-mikrotik-variables">2. Mikrotik Variables<a class="headerlink" href="#2-mikrotik-variables" title="Permanent link">&para;</a></h4>
+<p>Common Mikrotik variables that can be passed:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip</code></td>
+<td>Client IP address</td>
+<td><code>192.168.1.100</code></td>
+</tr>
+<tr>
+<td><code>mac</code></td>
+<td>Client MAC address</td>
+<td><code>AA:BB:CC:DD:EE:FF</code></td>
+</tr>
+<tr>
+<td><code>router</code></td>
+<td>Router/AP name</td>
+<td><code>AP1</code></td>
+</tr>
+<tr>
+<td><code>ssid</code></td>
+<td>WiFi network name</td>
+<td><code>Guntu_WiFi</code></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>Username (if any)</td>
+<td><code>guest</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-custom-url-configuration">3. Custom URL Configuration<a class="headerlink" href="#3-custom-url-configuration" title="Permanent link">&para;</a></h4>
+<p>Configure Mikrotik to pass additional parameters:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Custom login URL with parameters</span>
+/ip<span class="w"> </span>hotspot<span class="w"> </span>profile<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">[</span>find<span class="w"> </span><span class="nv">name</span><span class="o">=</span>default<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>login-page<span class="o">=</span><span class="s2">&quot;https://yourdomain.com/mikrotik-login.html?ip=</span><span class="si">${</span><span class="nv">ip</span><span class="si">}</span><span class="s2">&amp;mac=</span><span class="si">${</span><span class="nv">mac</span><span class="si">}</span><span class="s2">&amp;router=</span><span class="si">${</span><span class="nv">router_name</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h3 id="fallback-detection">Fallback Detection<a class="headerlink" href="#fallback-detection" title="Permanent link">&para;</a></h3>
+<p>If Mikrotik doesn't pass parameters, the system uses fallbacks:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Fallback IP detection</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">detectLocalIP</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Returns placeholder IP if detection fails</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;192.168.1.100&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Fallback MAC detection</span>
+<span class="kd">function</span><span class="w"> </span><span class="nx">detectLocalMAC</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Returns placeholder MAC if detection fails</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;AA:BB:CC:DD:EE:FF&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="package-configuration">Package Configuration<a class="headerlink" href="#package-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="default-packages">Default Packages<a class="headerlink" href="#default-packages" title="Permanent link">&para;</a></h3>
+<p>The login page comes with three default packages:</p>
+<table>
+<thead>
+<tr>
+<th>Package ID</th>
+<th>Duration</th>
+<th>Price</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1 Hour</td>
+<td>KES 10.00</td>
+<td>Fast internet for 1 hour</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3 Hours</td>
+<td>KES 25.00</td>
+<td>Extended internet access</td>
+</tr>
+<tr>
+<td>3</td>
+<td>24 Hours</td>
+<td>KES 50.00</td>
+<td>Full day internet access</td>
+</tr>
+</tbody>
+</table>
+<h3 id="customizing-packages">Customizing Packages<a class="headerlink" href="#customizing-packages" title="Permanent link">&para;</a></h3>
+<p>To customize packages, update the HTML:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;package-option&quot;</span> <span class="na">data-package-id</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="na">data-price</span><span class="o">=</span><span class="s">&quot;15.00&quot;</span> <span class="na">data-duration</span><span class="o">=</span><span class="s">&quot;2&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;package-name&quot;</span><span class="p">&gt;</span>2 Hours Package<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;package-details&quot;</span><span class="p">&gt;</span>Extended internet access for 2 hours<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;package-price&quot;</span><span class="p">&gt;</span>KES 15.00<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p><strong>Important</strong>: Package IDs must match those in your Django database.</p>
+<h3 id="package-database-synchronization">Package-Database Synchronization<a class="headerlink" href="#package-database-synchronization" title="Permanent link">&para;</a></h3>
+<p>Ensure your Django packages match the login page:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Example package creation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">routers.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Package</span><span class="p">,</span> <span class="n">Router</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Package</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">router</span><span class="o">=</span><span class="n">router</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;1 Hour Package&quot;</span><span class="p">,</span>
+    <span class="n">package_type</span><span class="o">=</span><span class="s2">&quot;hourly&quot;</span><span class="p">,</span>
+    <span class="n">duration_hours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">price</span><span class="o">=</span><span class="mf">10.00</span><span class="p">,</span>
+    <span class="n">speed_mbps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="payment-flow-integration">Payment Flow Integration<a class="headerlink" href="#payment-flow-integration" title="Permanent link">&para;</a></h2>
+<h3 id="1-payment-initiation">1. Payment Initiation<a class="headerlink" href="#1-payment-initiation" title="Permanent link">&para;</a></h3>
+<p>When user clicks "Pay with M-Pesa":</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">paymentData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router_id</span><span class="o">:</span><span class="w"> </span><span class="nx">ROUTER_ID</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">package_id</span><span class="o">:</span><span class="w"> </span><span class="nx">selectedPackage</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">phone_number</span><span class="o">:</span><span class="w"> </span><span class="nx">phoneNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="nx">selectedPackage</span><span class="p">.</span><span class="nx">price</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">mac_address</span><span class="o">:</span><span class="w"> </span><span class="nx">clientInfo</span><span class="p">.</span><span class="nx">mac</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">ip_address</span><span class="o">:</span><span class="w"> </span><span class="nx">clientInfo</span><span class="p">.</span><span class="nx">ip</span>
+<span class="p">};</span>
+
+<span class="c1">// Call IntaSend API</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE_URL</span><span class="si">}</span><span class="sb">/payments/intasend/initiate/`</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="sb">`Bearer </span><span class="si">${</span><span class="nx">JWT_TOKEN</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;application/json&#39;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">paymentData</span><span class="p">)</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="2-status-polling">2. Status Polling<a class="headerlink" href="#2-status-polling" title="Permanent link">&para;</a></h3>
+<p>After payment initiation, the system polls for status:</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">pollPaymentStatus</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Check payment status every 3 seconds</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">API_BASE_URL</span><span class="si">}</span><span class="sb">/payments/intasend/</span><span class="si">${</span><span class="nx">currentPayment</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">/check-status/`</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;completed&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Payment successful - auto-login to Mikrotik</span>
+<span class="w">        </span><span class="nx">autoLoginToMikrotik</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;failed&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Payment failed - show error</span>
+<span class="w">        </span><span class="nx">showStatus</span><span class="p">(</span><span class="s1">&#39;Payment failed. Please try again.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;error&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Still processing - continue polling</span>
+<span class="w">        </span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">pollPaymentStatus</span><span class="p">,</span><span class="w"> </span><span class="mf">3000</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-auto-login">3. Auto-Login<a class="headerlink" href="#3-auto-login" title="Permanent link">&para;</a></h3>
+<p>Upon successful payment:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">autoLoginToMikrotik</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">currentUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">loginUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="nx">currentUrl</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Add Mikrotik authentication parameters</span>
+<span class="w">    </span><span class="nx">loginUrl</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;dst&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">loginUrl</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;popup&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">loginUrl</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;guest&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">loginUrl</span><span class="p">.</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;guest&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Redirect to complete login</span>
+<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">loginUrl</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">&para;</a></h2>
+<h3 id="1-jwt-token-management">1. JWT Token Management<a class="headerlink" href="#1-jwt-token-management" title="Permanent link">&para;</a></h3>
+<p><strong>Never expose JWT tokens in client-side code in production!</strong></p>
+<p>Instead, use one of these approaches:</p>
+<h4 id="option-a-server-side-token-generation">Option A: Server-Side Token Generation<a class="headerlink" href="#option-a-server-side-token-generation" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a view that generates temporary tokens</span>
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_hotspot_token</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># Validate request (e.g., check if from Mikrotik)</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">AccessToken</span><span class="o">.</span><span class="n">for_user</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">token</span><span class="p">)})</span>
+</code></pre></div>
+<h4 id="option-b-session-based-authentication">Option B: Session-Based Authentication<a class="headerlink" href="#option-b-session-based-authentication" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use Django sessions instead of JWT</span>
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">initiate_hotspot_payment</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hotspot_authenticated&#39;</span><span class="p">):</span>
+        <span class="c1"># Process payment</span>
+        <span class="k">pass</span>
+</code></pre></div>
+<h4 id="option-c-ip-based-authentication">Option C: IP-Based Authentication<a class="headerlink" href="#option-c-ip-based-authentication" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Allow requests from Mikrotik IP range</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MikrotikAuthentication</span><span class="p">(</span><span class="n">BaseAuthentication</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">client_ip</span> <span class="o">=</span> <span class="n">get_client_ip</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">client_ip</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;192.168.1.&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">AnonymousUser</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</code></pre></div>
+<h3 id="2-https-requirements">2. HTTPS Requirements<a class="headerlink" href="#2-https-requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Always use HTTPS</strong> for production</li>
+<li><strong>Valid SSL certificate</strong> required</li>
+<li><strong>Secure cookies</strong> for session management</li>
+</ul>
+<h3 id="3-rate-limiting">3. Rate Limiting<a class="headerlink" href="#3-rate-limiting" title="Permanent link">&para;</a></h3>
+<p>Implement rate limiting to prevent abuse:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django_ratelimit.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">ratelimit</span>
+
+<span class="nd">@ratelimit</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="s1">&#39;5/m&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">)</span>
+<span class="nd">@api_view</span><span class="p">([</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">initiate_intasend_payment</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># Payment logic</span>
+    <span class="k">pass</span>
+</code></pre></div>
+<h2 id="testing-and-debugging">Testing and Debugging<a class="headerlink" href="#testing-and-debugging" title="Permanent link">&para;</a></h2>
+<h3 id="1-debug-mode">1. Debug Mode<a class="headerlink" href="#1-debug-mode" title="Permanent link">&para;</a></h3>
+<p>Enable debug mode during development:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">SHOW_DEBUG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="c1">// Set to false in production</span>
+</code></pre></div>
+<p>Debug information includes:
+- Client IP/MAC detection
+- API request/response data
+- Payment flow status
+- Error details</p>
+<h3 id="2-console-logging">2. Console Logging<a class="headerlink" href="#2-console-logging" title="Permanent link">&para;</a></h3>
+<p>Check browser console for detailed logs:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Payment initiated:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">paymentData</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;API response:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Client info:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">clientInfo</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="3-network-tab">3. Network Tab<a class="headerlink" href="#3-network-tab" title="Permanent link">&para;</a></h3>
+<p>Monitor API calls in browser DevTools:
+- Request payloads
+- Response data
+- HTTP status codes
+- Headers</p>
+<h3 id="4-common-issues">4. Common Issues<a class="headerlink" href="#4-common-issues" title="Permanent link">&para;</a></h3>
+<h4 id="payment-not-initiating">Payment Not Initiating<a class="headerlink" href="#payment-not-initiating" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Check JWT token validity</li>
+<li>Verify API endpoint URL</li>
+<li>Check browser console for errors</li>
+<li>Ensure CORS is configured</li>
+</ul>
+<h4 id="client-info-not-detected">Client Info Not Detected<a class="headerlink" href="#client-info-not-detected" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Verify Mikrotik URL parameters</li>
+<li>Check fallback values</li>
+<li>Enable debug mode</li>
+<li>Review network configuration</li>
+</ul>
+<h4 id="auto-login-not-working">Auto-Login Not Working<a class="headerlink" href="#auto-login-not-working" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Check Mikrotik login parameters</li>
+<li>Verify redirect URL format</li>
+<li>Test with manual login</li>
+<li>Review hotspot configuration</li>
+</ul>
+<h2 id="production-deployment">Production Deployment<a class="headerlink" href="#production-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="1-file-optimization">1. File Optimization<a class="headerlink" href="#1-file-optimization" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Minify CSS/JS</strong> for faster loading</li>
+<li><strong>Compress images</strong> for bandwidth savings</li>
+<li><strong>Enable gzip</strong> on web server</li>
+<li><strong>Use CDN</strong> for static assets</li>
+</ul>
+<h3 id="2-security-hardening">2. Security Hardening<a class="headerlink" href="#2-security-hardening" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Disable debug mode</strong> (<code>SHOW_DEBUG = false</code>)</li>
+<li><strong>Use secure JWT tokens</strong></li>
+<li><strong>Implement rate limiting</strong></li>
+<li><strong>Enable HTTPS only</strong></li>
+</ul>
+<h3 id="3-monitoring">3. Monitoring<a class="headerlink" href="#3-monitoring" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Log payment attempts</strong></li>
+<li><strong>Monitor API usage</strong></li>
+<li><strong>Track success rates</strong></li>
+<li><strong>Alert on failures</strong></li>
+</ul>
+<h3 id="4-backup-and-recovery">4. Backup and Recovery<a class="headerlink" href="#4-backup-and-recovery" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Regular backups</strong> of configuration</li>
+<li><strong>Version control</strong> for login pages</li>
+<li><strong>Rollback procedures</strong> for updates</li>
+<li><strong>Disaster recovery</strong> plan</li>
+</ul>
+<h2 id="advanced-features">Advanced Features<a class="headerlink" href="#advanced-features" title="Permanent link">&para;</a></h2>
+<h3 id="1-custom-branding">1. Custom Branding<a class="headerlink" href="#1-custom-branding" title="Permanent link">&para;</a></h3>
+<p>Update the login page with your branding:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">logo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">135</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="mh">#your</span><span class="nv">-color1</span><span class="p">,</span><span class="w"> </span><span class="mh">#your</span><span class="nv">-color2</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">pay-button</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">135</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="mh">#your</span><span class="nv">-primary</span><span class="p">,</span><span class="w"> </span><span class="mh">#your</span><span class="nv">-secondary</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="2-multi-language-support">2. Multi-Language Support<a class="headerlink" href="#2-multi-language-support" title="Permanent link">&para;</a></h3>
+<p>Add language selection:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">languages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">en</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;WiFi Login&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">subtitle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Choose a package...&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">sw</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;WiFi Ingia&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">subtitle</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Chagua paketi...&#39;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">setLanguage</span><span class="p">(</span><span class="nx">lang</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">languages</span><span class="p">[</span><span class="nx">lang</span><span class="p">].</span><span class="nx">title</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;subtitle&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">languages</span><span class="p">[</span><span class="nx">lang</span><span class="p">].</span><span class="nx">subtitle</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-analytics-integration">3. Analytics Integration<a class="headerlink" href="#3-analytics-integration" title="Permanent link">&para;</a></h3>
+<p>Track user behavior:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Google Analytics</span>
+<span class="nx">gtag</span><span class="p">(</span><span class="s1">&#39;event&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;payment_initiated&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">package_id</span><span class="o">:</span><span class="w"> </span><span class="nx">selectedPackage</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">amount</span><span class="o">:</span><span class="w"> </span><span class="nx">selectedPackage</span><span class="p">.</span><span class="nx">price</span>
+<span class="p">});</span>
+
+<span class="c1">// Custom tracking</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/analytics/track&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">action</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;package_selected&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="kr">package</span><span class="o">:</span><span class="w"> </span><span class="nx">selectedPackage</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="support-and-troubleshooting">Support and Troubleshooting<a class="headerlink" href="#support-and-troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="1-common-questions">1. Common Questions<a class="headerlink" href="#1-common-questions" title="Permanent link">&para;</a></h3>
+<p><strong>Q: How do I change package prices?</strong>
+A: Update both the HTML file and Django database to match.</p>
+<p><strong>Q: Can I add more payment methods?</strong>
+A: Yes, extend the payment logic to support other providers.</p>
+<p><strong>Q: How do I customize the design?</strong>
+A: Modify the CSS styles in the HTML file.</p>
+<h3 id="2-getting-help">2. Getting Help<a class="headerlink" href="#2-getting-help" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Documentation</strong>: Check this guide and API docs</li>
+<li><strong>Debug Mode</strong>: Enable for detailed error information</li>
+<li><strong>Console Logs</strong>: Check browser developer tools</li>
+<li><strong>API Testing</strong>: Test endpoints with Postman/cURL</li>
+</ul>
+<h3 id="3-updates-and-maintenance">3. Updates and Maintenance<a class="headerlink" href="#3-updates-and-maintenance" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Regular Updates</strong>: Keep packages and prices current</li>
+<li><strong>Security Patches</strong>: Monitor for security updates</li>
+<li><strong>Performance Monitoring</strong>: Track loading times and success rates</li>
+<li><strong>User Feedback</strong>: Collect and address user concerns</li>
+</ul>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>The Mikrotik integration provides a complete payment-to-access solution for WiFi hotspots. By following this guide, you can:</p>
+<ol>
+<li><strong>Deploy</strong> the login page on your Mikrotik router</li>
+<li><strong>Configure</strong> packages and pricing</li>
+<li><strong>Integrate</strong> with the IntaSend payment system</li>
+<li><strong>Automate</strong> user access after payment</li>
+<li><strong>Monitor</strong> and maintain the system</li>
+</ol>
+<p>For additional support or customization, refer to the API documentation and contact the development team.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "content.code.copy", "content.tabs.link", "search.highlight", "search.share", "navigation.indexes"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+    
+  </body>
+</html>

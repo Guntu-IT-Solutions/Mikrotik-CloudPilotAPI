@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WiFi Login - Guntu IT Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #d9561e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .client-info {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .client-info div {
+            margin-bottom: 8px;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .client-info div:last-child {
+            margin-right: 0;
+        }
+
+        .client-info strong {
+            color: #d9561e;
+        }
+
+        .package-selector {
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .package-option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .package-option:hover {
+            border-color: #d9561e;
+            background: #fff5f0;
+            transform: translateY(-2px);
+        }
+
+        .package-option.selected {
+            border-color: #d9561e;
+            background: #fff5f0;
+            box-shadow: 0 5px 15px rgba(217, 86, 30, 0.2);
+        }
+
+        .package-name {
+            font-weight: bold;
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .package-details {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .package-price {
+            color: #d9561e;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: #d9561e;
+        }
+
+        .phone-input::placeholder {
+            color: #999;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .pay-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+        }
+
+        .pay-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #d9561e;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">G</div>
+        <h1>WiFi Login</h1>
+        <p class="subtitle">Choose a package and pay with M-Pesa to get connected</p>
+
+        <!-- Client Information Display -->
+        <div class="client-info">
+            <div><strong>IP Address:</strong> <span id="clientIP">Detecting...</span></div>
+            <div><strong>MAC Address:</strong> <span id="clientMAC">Detecting...</span></div>
+            <div><strong>Router:</strong> <span id="routerName">Detecting...</span></div>
+        </div>
+
+        <!-- Package Selection -->
+        <div class="package-selector" id="packageSelector">
+            <!-- Packages will be dynamically generated from JSON configuration -->
+        </div>
+
+        <!-- Phone Number Input -->
+        <input type="tel" class="phone-input" id="phoneNumber" placeholder="Enter your phone number (e.g., 0712345678)" maxlength="10">
+
+        <!-- Pay Button -->
+        <button class="pay-button" id="payButton" onclick="initiatePayment()">
+            Pay with M-Pesa
+        </button>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message hidden"></div>
+
+        <!-- Payment Progress -->
+        <div id="paymentProgress" class="hidden">
+            <div class="status-message status-info">
+                <span class="loading"></span>
+                Processing payment... Please check your phone for M-Pesa STK push
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden">
+            <div class="status-message status-success">
+                ✅ Payment successful! You are now connected to WiFi.
+            </div>
+        </div>
+
+        <div class="footer">
+            Powered by <a href="https://guntu.net" target="_blank">Guntu IT Solutions</a>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - Update these values
+        const API_BASE_URL = 'http://localhost:8000'; // Update with your domain
+        const ROUTER_ID = 8; // Update with your router ID
+        const PUBLIC_API_KEY = '646658fed7bf73881e5792657cbec318'; // Update with your public API key
+
+        // Package Configuration - Easy to edit
+        // To add/remove packages, simply edit this array:
+        // - id: Package ID from your database (must match router packages)
+        // - name: Display name for the package
+        // - details: Description of what the package includes
+        // - price: Cost in KES (as string to avoid decimal precision issues)
+        // - duration: Duration in hours
+        const PACKAGES = [
+            {
+                id: 2,
+                name: "1 Hour",
+                details: "Fast internet for 1 hour",
+                price: "10.00",
+                duration: 1
+            },
+            {
+                id: 3,
+                name: "3 Hours", 
+                details: "Extended internet access for 3 hours",
+                price: "25.00",
+                duration: 3
+            },
+            {
+                id: 4,
+                name: "24 Hours",
+                details: "Full day internet access",
+                price: "50.00",
+                duration: 24
+            }
+            // Add more packages here by copying the format above
+            // Don't forget to add a comma after the previous package
+        ];
+
+        let selectedPackage = null;
+        let currentPayment = null;
+        let clientInfo = {};
+
+        // Initialize client information
+        function initializeClientInfo() {
+            // Try to get client info from Mikrotik
+            clientInfo = {
+                ip: getClientIP(),
+                mac: getMacAddress(),
+                router: getRouterInfo()
+            };
+
+            // Update display
+            document.getElementById('clientIP').textContent = clientInfo.ip;
+            document.getElementById('clientMAC').textContent = clientInfo.mac;
+            document.getElementById('routerName').textContent = clientInfo.router;
+        }
+
+        // Get client IP address from Mikrotik
+        function getClientIP() {
+            // Try to get from Mikrotik URL parameters (common Mikrotik parameters)
+            const urlParams = new URLSearchParams(window.location.search);
+            let ip = urlParams.get('ip') || 
+                     urlParams.get('client_ip') || 
+                     urlParams.get('ip_address') ||
+                     urlParams.get('src') ||
+                     urlParams.get('address');
+            
+            if (!ip) {
+                // Try to get from Mikrotik specific parameters
+                ip = urlParams.get('mac') ? getIPFromMAC(urlParams.get('mac')) : null;
+            }
+            
+            if (!ip) {
+                // Try to get from Mikrotik environment variables or headers
+                ip = getIPFromMikrotikHeaders();
+            }
+            
+            if (!ip) {
+                // Fallback: try to detect from network
+                ip = detectLocalIP();
+            }
+            
+            return ip || '192.168.1.100';
+        }
+
+        // Get MAC address from Mikrotik
+        function getMacAddress() {
+            // Try to get from Mikrotik URL parameters (common Mikrotik parameters)
+            const urlParams = new URLSearchParams(window.location.search);
+            let mac = urlParams.get('mac') || 
+                     urlParams.get('mac_address') || 
+                     urlParams.get('client_mac') ||
+                     urlParams.get('srcmac') ||
+                     urlParams.get('macaddr');
+            
+            if (!mac) {
+                // Try to get from Mikrotik specific parameters
+                mac = urlParams.get('ip') ? getMACFromIP(urlParams.get('ip')) : null;
+            }
+            
+            if (!mac) {
+                // Try to get from Mikrotik environment variables or headers
+                mac = getMACFromMikrotikHeaders();
+            }
+            
+            if (!mac) {
+                // Fallback: try to detect from network
+                mac = detectLocalMAC();
+            }
+            
+            return mac || 'AA:BB:CC:DD:EE:FF';
+        }
+
+        // Get router information from Mikrotik
+        function getRouterInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let router = urlParams.get('router') || 
+                         urlParams.get('router_name') || 
+                         urlParams.get('ap') ||
+                         urlParams.get('ssid') ||
+                         urlParams.get('hotspot');
+            
+            if (!router) {
+                // Try to get from hostname or Mikrotik specific info
+                router = getRouterFromMikrotik();
+            }
+            
+            return router;
+        }
+
+        // Try to get IP from Mikrotik headers or environment
+        function getIPFromMikrotikHeaders() {
+            try {
+                // Check for common Mikrotik headers
+                const headers = {
+                    'X-Forwarded-For': 'X-Forwarded-For',
+                    'X-Real-IP': 'X-Real-IP',
+                    'X-Client-IP': 'X-Client-IP'
+                };
+                
+                // In a real Mikrotik environment, these might be available
+                // For now, return null to use fallback
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Try to get MAC from Mikrotik headers or environment
+        function getMACFromMikrotikHeaders() {
+            try {
+                // Check for common Mikrotik headers
+                const headers = {
+                    'X-Client-MAC': 'X-Client-MAC',
+                    'X-MAC-Address': 'X-MAC-Address'
+                };
+                
+                // In a real Mikrotik environment, these might be available
+                // For now, return null to use fallback
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Get router info from Mikrotik environment
+        function getRouterFromMikrotik() {
+            try {
+                // Try to get from hostname
+                let router = window.location.hostname;
+                
+                // Clean up hostname
+                if (router && router !== 'localhost' && router !== '127.0.0.1') {
+                    // Remove common suffixes
+                    router = router.replace(/\.local$/, '');
+                    router = router.replace(/\.lan$/, '');
+                    router = router.replace(/\.home$/, '');
+                    return router;
+                }
+                
+                // Try to get from page title or other Mikrotik indicators
+                const title = document.title;
+                if (title && title.includes('Mikrotik')) {
+                    return 'Mikrotik Router';
+                }
+                
+                return 'Mikrotik Router';
+            } catch (e) {
+                return 'Mikrotik Router';
+            }
+        }
+
+        // Fallback IP detection
+        function detectLocalIP() {
+            try {
+                // This is a basic attempt - in real Mikrotik environment, 
+                // the IP should be passed as a parameter
+                return '192.168.1.100';
+            } catch (e) {
+                return '192.168.1.100';
+            }
+        }
+
+        // Fallback MAC detection
+        function detectLocalMAC() {
+            try {
+                // This is a basic attempt - in real Mikrotik environment, 
+                // the MAC should be passed as a parameter
+                return 'AA:BB:CC:DD:EE:FF';
+            } catch (e) {
+                return 'AA:BB:CC:DD:EE:FF';
+            }
+        }
+
+        // Helper functions for Mikrotik integration
+        function getIPFromMAC(mac) {
+            // This would need to be implemented based on your Mikrotik setup
+            // For now, return null to use fallback
+            return null;
+        }
+
+        function getMACFromIP(ip) {
+            // This would need to be implemented based on your Mikrotik setup
+            // For now, return null to use fallback
+            return null;
+        }
+
+        // Generate packages from configuration
+        function generatePackages() {
+            const packageSelector = document.getElementById('packageSelector');
+            packageSelector.innerHTML = ''; // Clear existing packages
+            
+            PACKAGES.forEach(package => {
+                const packageDiv = document.createElement('div');
+                packageDiv.className = 'package-option';
+                packageDiv.dataset.packageId = package.id;
+                packageDiv.dataset.price = package.price;
+                packageDiv.dataset.duration = package.duration;
+                
+                packageDiv.innerHTML = `
+                    <div class="package-name">${package.name}</div>
+                    <div class="package-details">${package.details}</div>
+                    <div class="package-price">KES ${package.price}</div>
+                `;
+                
+                // Add click event listener
+                packageDiv.addEventListener('click', function() {
+                    // Remove previous selection
+                    document.querySelectorAll('.package-option').forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select current option
+                    this.classList.add('selected');
+                    
+                    // Store selected package
+                    selectedPackage = {
+                        id: this.dataset.packageId,
+                        price: this.dataset.price,
+                        duration: this.dataset.duration
+                    };
+                    
+                    // Enable pay button
+                    document.getElementById('payButton').disabled = false;
+                });
+                
+                packageSelector.appendChild(packageDiv);
+            });
+        }
+
+        // Package selection (old event listeners removed since packages are generated dynamically)
+        // document.querySelectorAll('.package-option').forEach(option => {
+        //     option.addEventListener('click', function() {
+        //         // Remove previous selection
+        //         document.querySelectorAll('.package-option').forEach(opt => opt.classList.remove('selected'));
+        //         
+        //         // Select current option
+        //         this.classList.add('selected');
+        //         
+        //         // Store selected package
+        //         selectedPackage = {
+        //             id: this.dataset.packageId,
+        //             price: this.dataset.price,
+        //             duration: this.dataset.duration
+        //         };
+        //         
+        //         // Enable pay button
+        //         document.getElementById('payButton').disabled = false;
+        //         
+        //         // console.log('Package Selected', selectedPackage); // Removed debug logging
+        //     });
+        // });
+
+        // Phone number validation
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            // Only allow numbers
+            this.value = this.value.replace(/\D/g, '');
+            
+            // Limit to 10 digits
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+
+        // Initialize payment
+        async function initiatePayment() {
+            if (!selectedPackage) {
+                showStatus('Please select a package first', 'error');
+                return;
+            }
+
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            if (!phoneNumber || phoneNumber.length !== 10) {
+                showStatus('Please enter a valid 10-digit phone number', 'error');
+                return;
+            }
+
+            // Disable pay button and show loading
+            document.getElementById('payButton').disabled = true;
+            document.getElementById('payButton').innerHTML = '<span class="loading"></span>Processing...';
+            hideStatus();
+            showPaymentProgress();
+
+            try {
+                // Create payment
+                const paymentData = {
+                    router_id: ROUTER_ID,
+                    package_id: selectedPackage.id,
+                    phone_number: phoneNumber,
+                    amount: selectedPackage.price,
+                    mac_address: clientInfo.mac,
+                    ip_address: clientInfo.ip
+                };
+
+                // console.log('Payment Data', paymentData); // Removed debug logging
+
+                const response = await fetch(`${API_BASE_URL}/payments/intasend/initiate/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Public-Key': PUBLIC_API_KEY
+                    },
+                    body: JSON.stringify(paymentData)
+                });
+
+                const result = await response.json();
+
+                // console.log('Payment Response', result); // Removed debug logging
+
+                if (response.ok && result.intasend.payment_id) {
+                    currentPayment = result.payment;
+                    showStatus('STK push sent to your phone. Please check and complete the payment.', 'info');
+                    
+                    // Start polling for payment status
+                    pollPaymentStatus();
+                } else {
+                    throw new Error(result.error || 'Failed to initiate payment');
+                }
+
+            } catch (error) {
+                console.error('Payment initiation error:', error);
+                showStatus(`Payment failed: ${error.message}`, 'error');
+                resetPaymentButton();
+            }
+        }
+
+        // Poll payment status
+        async function pollPaymentStatus() {
+            if (!currentPayment) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/payments/intasend/${currentPayment.id}/check-status/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Public-Key': PUBLIC_API_KEY
+                    }
+                });
+
+                const result = await response.json();
+
+                // console.log('Status Check Response', result); // Removed debug logging
+
+                if (response.ok) {
+                    if (result.status === 'completed') {
+                        // Payment successful
+                        hidePaymentProgress();
+                        showSuccessMessage();
+                        
+                        // Auto-login to Mikrotik
+                        setTimeout(() => {
+                            autoLoginToMikrotik();
+                        }, 2000);
+                        
+                        return;
+                    } else if (result.status === 'failed') {
+                        // Payment failed
+                        hidePaymentProgress();
+                        showStatus('Payment failed. Please try again.', 'error');
+                        resetPaymentButton();
+                        return;
+                    }
+                }
+
+                // Continue polling if still processing
+                setTimeout(pollPaymentStatus, 3000);
+
+            } catch (error) {
+                console.error('Status check error:', error);
+                // Continue polling on error
+                setTimeout(pollPaymentStatus, 5000);
+            }
+        }
+
+        // Auto-login to Mikrotik
+        function autoLoginToMikrotik() {
+            try {
+                // Get Mikrotik login URL from current page
+                const currentUrl = window.location.href;
+                const loginUrl = new URL(currentUrl);
+                
+                // Add authentication parameters for Mikrotik
+                loginUrl.searchParams.set('dst', '/');
+                loginUrl.searchParams.set('popup', 'true');
+                loginUrl.searchParams.set('username', 'guest');
+                loginUrl.searchParams.set('password', 'guest');
+                
+                // console.log('Auto-login URL', loginUrl.toString()); // Removed debug logging
+                
+                // Redirect to Mikrotik login
+                window.location.href = loginUrl.toString();
+                
+            } catch (error) {
+                console.error('Auto-login error:', error);
+                showStatus('Payment successful! Please refresh the page to connect.', 'success');
+            }
+        }
+
+        // Utility functions
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.classList.remove('hidden');
+        }
+
+        function hideStatus() {
+            document.getElementById('statusMessage').classList.add('hidden');
+        }
+
+        function showPaymentProgress() {
+            document.getElementById('paymentProgress').classList.remove('hidden');
+        }
+
+        function hidePaymentProgress() {
+            document.getElementById('paymentProgress').classList.add('hidden');
+        }
+
+        function showSuccessMessage() {
+            document.getElementById('successMessage').classList.remove('hidden');
+        }
+
+        function resetPaymentButton() {
+            document.getElementById('payButton').disabled = false;
+            document.getElementById('payButton').innerHTML = 'Pay with M-Pesa';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable pay button initially
+            document.getElementById('payButton').disabled = true;
+            
+            // Initialize client information
+            initializeClientInfo();
+            
+            // Generate packages
+            generatePackages();
+            
+            // Check if we're on Mikrotik login page
+            if (window.location.hostname.includes('mikrotik') || 
+                window.location.hostname.includes('router') ||
+                window.location.hostname.includes('192.168') ||
+                window.location.hostname.includes('10.0')) {
+                // console.log('Mikrotik login page detected'); // Removed debug logging
+            }
+        });
+    </script>
+</body>
+</html>
