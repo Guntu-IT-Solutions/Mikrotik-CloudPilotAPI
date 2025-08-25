@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>http://localhost:8001/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/index.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/api-reference/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/api-reference.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/authentication/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/authentication.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/intasend-payments/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/intasend-payments.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/kopokopo-payments/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/kopokopo-payments.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/mikrotik-integration/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/mikrotik-integration.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/packages/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/packages.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/payment-credentials/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/payment-credentials.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/router-api/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/router-api.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
     <url>
-         <loc>http://localhost:8001/setup-guide/</loc>
+         <loc>https://mikrotik-cloudpilotapi.onrender.com/setup-guide.html</loc>
          <lastmod>2025-08-25</lastmod>
     </url>
 </urlset>

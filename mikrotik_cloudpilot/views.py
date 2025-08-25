@@ -27,8 +27,18 @@ def serve_docs(request, path=''):
                 docs_path = test_path
                 break
     
-    # Check if file exists
-    if not os.path.exists(docs_path):
+    # Check if the path exists and handle directories
+    if os.path.exists(docs_path):
+        if os.path.isdir(docs_path):
+            # If it's a directory, try to serve index.html from it
+            index_path = os.path.join(docs_path, 'index.html')
+            if os.path.exists(index_path):
+                docs_path = index_path
+            else:
+                # If no index.html, try to list directory contents or redirect
+                return HttpResponse(f'Directory listing not available. Try: {path}/index.html', status=404)
+        # Continue with the file (either original or index.html from directory)
+    else:
         # Try to serve index.html for 404s (SPA routing)
         index_path = os.path.join(settings.STATIC_ROOT, 'index.html')
         if os.path.exists(index_path):
@@ -42,7 +52,18 @@ def serve_docs(request, path=''):
                 with open(index_path, 'rb') as f:
                     return HttpResponse(f.read(), content_type='text/html')
         
-        return HttpResponse(f'Documentation not found: {path}', status=404)
+        # Provide detailed error information for debugging
+        error_msg = f"""
+        Documentation not found: {path}
+        
+        Searched in:
+        - STATIC_ROOT: {settings.STATIC_ROOT}
+        - STATICFILES_DIRS: {settings.STATICFILES_DIRS}
+        
+        Available files in STATIC_ROOT:
+        {os.listdir(settings.STATIC_ROOT) if os.path.exists(settings.STATIC_ROOT) else 'Directory not found'}
+        """
+        return HttpResponse(error_msg, status=404)
     
     # Determine content type based on file extension
     content_type = 'text/plain'
@@ -70,6 +91,6 @@ def serve_docs(request, path=''):
 
 def docs_home(request):
     """
-    Redirect to the main documentation page.
+    Serve the main documentation page.
     """
     return serve_docs(request, 'index.html')

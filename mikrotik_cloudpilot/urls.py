@@ -29,9 +29,12 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('routers/', include('routers.urls')),
     path('payments/', include('payments.urls')),
-    # Documentation routes
-    path('docs/', docs_home, name='docs_home'),
+    
+    # Documentation routes - serve docs at root for proper asset paths
+    path('', docs_home, name='docs_home'),
+    path('docs/', docs_home, name='docs_home'),  # Keep /docs/ path for compatibility
     path('docs/<path:path>', serve_docs, name='serve_docs'),
+    path('<path:path>', serve_docs, name='serve_docs_catchall'),
 ]
 
 # Serve static files in development

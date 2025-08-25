@@ -1,5 +1,6 @@
 site_name: Mikrotik CloudPilot API Docs
-site_url: http://localhost:8001/
+site_url: https://mikrotik-cloudpilotapi.onrender.com/
+use_directory_urls: false  # This will help with asset paths
 theme:
   name: material
   language: en

@@ -408,7 +408,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
 
 === "cURL"
     ```bash
-    curl -X POST http://localhost:8000/payments/intasend/initiate/ \
+    curl -X POST https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/initiate/ \
       -H "Authorization: Bearer <your_jwt_token>" \
       -H "Content-Type: application/json" \
       -d '{
@@ -440,7 +440,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
     }
 
     response = requests.post(
-        "http://localhost:8000/payments/intasend/initiate/",
+        "https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/initiate/",
         headers=headers,
         json=data
     )
@@ -457,7 +457,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
 
 === "JavaScript"
     ```javascript
-    const response = await fetch('http://localhost:8000/payments/intasend/initiate/', {
+    const response = await fetch('https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/initiate/', {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer <your_jwt_token>',
@@ -488,7 +488,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
 
 === "cURL"
     ```bash
-    curl -X POST http://localhost:8000/api/payments/intasend/550e8400-e29b-41d4-a716-446655440000/check-status/ \
+    curl -X POST https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/550e8400-e29b-41d4-a716-446655440000/check-status/ \
       -H "Authorization: Bearer <your_jwt_token>"
     ```
 
@@ -503,7 +503,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
     payment_id = "550e8400-e29b-41d4-a716-446655440000"
     
     response = requests.post(
-        f"http://localhost:8000/api/payments/intasend/{payment_id}/check-status/",
+        f"https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/{payment_id}/check-status/",
         headers=headers
     )
 
@@ -520,7 +520,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
     ```javascript
     const paymentId = '550e8400-e29b-41d4-a716-446655440000';
     
-    const response = await fetch(`http://localhost:8000/api/payments/intasend/${paymentId}/check-status/`, {
+    const response = await fetch(`https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/${paymentId}/check-status/`, {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer <your_jwt_token>'
@@ -541,7 +541,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
 
 === "cURL"
     ```bash
-    curl -X POST http://localhost:8000/api/payments/intasend/create-link/ \
+    curl -X POST https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/create-link/ \
       -H "Authorization: Bearer <your_jwt_token>" \
       -H "Content-Type: application/json" \
       -d '{
@@ -569,7 +569,7 @@ Creates a shareable payment link for a WiFi package. This endpoint:
     }
 
     response = requests.post(
-        "http://localhost:8000/api/payments/intasend/create-link/",
+        "https://mikrotik-cloudpilotapi.onrender.com/payments/intasend/create-link/",
         headers=headers,
         json=data
     )
@@ -723,8 +723,6 @@ Each payment record includes:
 - Valid IntaSend credentials in the database
 - Payment was created using IntaSend endpoints
 
-### Common Issues
-
 #### Django Sites App Error
 If you see this error:
 ```
@@ -779,4 +777,38 @@ INTASEND_FAIL_URL_BASE = "https://yourdomain.com/payment/failed/"
 
 ### 1. Webhook Setup
 Configure IntaSend webhooks to automatically update payment status:
-- **URL**: `
+- **URL**: `https://yourdomain.com/payments/webhook/`
+- **Events**: Payment completed, failed, cancelled
+
+### 2. Status Polling
+For real-time updates, poll payment status every 30 seconds:
+```python
+# Check status every 30 seconds until completed
+while payment.status not in ['completed', 'failed']:
+    time.sleep(30)
+    check_payment_status(payment.id)
+```
+
+### 3. Error Recovery
+Implement retry logic for failed payments:
+```python
+if payment.retry_count < 3:
+    payment.increment_retry()
+    # Retry payment initiation
+```
+
+## Support
+
+For additional help with IntaSend integration:
+
+1. **IntaSend Documentation**: [https://docs.intasend.com](https://docs.intasend.com)
+2. **API Status**: Check IntaSend status page
+3. **Error Codes**: Refer to IntaSend error documentation
+4. **Testing**: Use sandbox environment for development
+
+## Related Documentation
+
+- **[Payment Credentials](payment-credentials.md)**: Managing IntaSend API credentials
+- **[Payment Transactions](payment-transactions.md)**: Payment record management
+- **[Router API](router-api.md)**: Router and package information
+- **[Authentication](authentication.md)**: JWT authentication system
