@@ -1,0 +1,66 @@
+site_name: Mikrotik CloudPilot API Docs
+site_url: http://localhost:8001/
+theme:
+  name: material
+  language: en
+  icon:
+    previous: fontawesome/solid/angle-left
+    next: fontawesome/solid/angle-right
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - content.code.copy
+    - content.tabs.link
+    - search.highlight
+    - search.share
+    - navigation.indexes
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: indigo
+      accent: indigo
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: indigo
+      accent: indigo
+
+nav:
+  - Overview: index.md
+  - Setup Guide: setup-guide.md
+  - Authentication: authentication.md
+  - Routers API:
+    - Router API: router-api.md
+    - Package Management: packages.md
+  - Payments API :
+    - Payment Credentials: payment-credentials.md
+    - Payment Transactions: payment-transactions.md
+    - IntaSend Integration: intasend-payments.md
+    - KopoKopo Integration: kopokopo-payments.md
+    - Mikrotik Integration: mikrotik-integration.md
+  - API Reference: api-reference.md
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+  - attr_list
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/
+
+
