@@ -34,6 +34,9 @@ urlpatterns = [
     path('', docs_home, name='docs_home'),
     path('docs/', docs_home, name='docs_home'),  # Keep /docs/ path for compatibility
     path('docs/<path:path>', serve_docs, name='serve_docs'),
+    
+    # Catch-all for documentation files (CSS, JS, images) - only for non-API paths
+    # This should only handle documentation and static files, not API endpoints
     path('<path:path>', serve_docs, name='serve_docs_catchall'),
 ]
 

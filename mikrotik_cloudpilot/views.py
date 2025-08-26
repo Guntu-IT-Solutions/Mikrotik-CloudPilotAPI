@@ -8,9 +8,14 @@ def serve_docs(request, path=''):
     Serve MkDocs documentation from the static files directory.
     This allows the documentation to be served through Django.
     """
-    # Build the full path to the documentation file
-    if not path:
-        path = 'index.html'
+    # Check if this is an API endpoint - if so, let Django handle it
+    api_prefixes = ['users/', 'routers/', 'payments/', 'admin/']
+    if any(path.startswith(prefix) for prefix in api_prefixes):
+        # This is an API endpoint, let Django handle the routing
+        # Return a 404 so Django can process it properly
+        from django.http import Http404
+        raise Http404(f"API endpoint '{path}' not found")
+    
     
     # Ensure the path is safe (no directory traversal)
     if '..' in path or path.startswith('/'):
@@ -39,31 +44,15 @@ def serve_docs(request, path=''):
                 return HttpResponse(f'Directory listing not available. Try: {path}/index.html', status=404)
         # Continue with the file (either original or index.html from directory)
     else:
-        # Try to serve index.html for 404s (SPA routing)
-        index_path = os.path.join(settings.STATIC_ROOT, 'index.html')
+        # Serve index.html for 404s (SPA routing)
+        index_path = os.path.join(docs_path, 'index.html')
         if os.path.exists(index_path):
             with open(index_path, 'rb') as f:
                 return HttpResponse(f.read(), content_type='text/html')
         
-        # If still not found, try STATICFILES_DIRS
-        for static_dir in settings.STATICFILES_DIRS:
-            index_path = os.path.join(static_dir, 'index.html')
-            if os.path.exists(index_path):
-                with open(index_path, 'rb') as f:
-                    return HttpResponse(f.read(), content_type='text/html')
-        
-        # Provide detailed error information for debugging
-        error_msg = f"""
-        Documentation not found: {path}
-        
-        Searched in:
-        - STATIC_ROOT: {settings.STATIC_ROOT}
-        - STATICFILES_DIRS: {settings.STATICFILES_DIRS}
-        
-        Available files in STATIC_ROOT:
-        {os.listdir(settings.STATIC_ROOT) if os.path.exists(settings.STATIC_ROOT) else 'Directory not found'}
-        """
-        return HttpResponse(error_msg, status=404)
+        # This is a genuine 404 - let Django handle it
+        from django.http import Http404
+        raise Http404(f"Documentation page '{path}' not found")
     
     # Determine content type based on file extension
     content_type = 'text/plain'
