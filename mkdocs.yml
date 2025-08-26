@@ -5,6 +5,7 @@ theme:
   name: material
   language: en
   logo: assets/logo.png
+  favicon: assets/favicon.png
   icon:
     previous: fontawesome/solid/angle-left
     next: fontawesome/solid/angle-right
@@ -20,6 +21,7 @@ theme:
     - content.tabs.link
     - search.highlight
     - search.share
+    - search.suggest
     - navigation.indexes
   palette:
     - media: '(prefers-color-scheme: light)'
@@ -61,8 +63,11 @@ markdown_extensions:
   - attr_list
 
 extra:
+  logo: assets/logo.png
+  logo_link: https://guntu.co.ke
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/
+      link: https://github.com/Guntu-IT-Solutions/Mikrotik-CloudPilotAPI
+  
 
 

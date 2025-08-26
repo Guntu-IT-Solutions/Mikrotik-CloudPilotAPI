@@ -72,35 +72,82 @@ A Django-based API for managing Mikrotik routers with user authentication, secur
 
 ### Local Development
 
-1. **Install dependencies**:
+1. **Clone the repository**:
+```bash
+git clone <your-repo-url>
+cd Mikrotik-CloudPilotAPI
+```
+
+2. **Set up environment variables**:
+```bash
+# Copy the example environment file
+cp env.example .env
+
+# Edit .env with your actual values
+# Generate Django secret key:
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+# Generate encryption key:
+python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+
+# Generate JWT signing key (optional, defaults to SECRET_KEY):
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+**Important Environment Variables:**
+- `SECRET_KEY`: Django secret key for cryptographic signing
+- `ENCRYPTION_KEY`: Fernet key for encrypting router passwords
+- `DEBUG`: Set to False in production
+- `ALLOWED_HOSTS`: Restrict to your domain names in production
+- `CORS_ALLOWED_ORIGINS`: Restrict CORS origins in production
+- `DATABASE_URL`: Production database connection string
+- `JWT_*`: JWT token configuration
+- `SECURE_*`: Security headers and HTTPS settings
+
+3. **Install dependencies**:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. **Generate encryption key**:
+4. **Generate encryption key** (if not using .env):
 ```bash
 python manage.py generate_encryption_key
 ```
 
-3. **Run initial setup**:
+5. **Run initial setup**:
 ```bash
 python manage.py migrate
 ```
 
-4. **Build documentation**:
+6. **Build documentation**:
 ```bash
 mkdocs build
 python manage.py collectstatic --noinput
 ```
 
-5. **Start the Django server**:
+7. **Start the Django server**:
 ```bash
 python manage.py runserver 8000
 ```
 
-6. **Access documentation**:
+8. **Access documentation**:
 - Local: http://localhost:8000/docs/
 - Production: https://mikrotik-cloudpilotapi.onrender.com/docs/
+
+### 🔒 Security Notes
+
+- **Never commit your `.env` file** - it contains sensitive information
+- **Generate unique keys** for each environment (development, staging, production)
+- **Rotate keys regularly** in production environments
+- **Use strong, random values** for SECRET_KEY and ENCRYPTION_KEY
+- **Restrict ALLOWED_HOSTS** in production to only your domain names
+- **Set DEBUG=False** in production environments
+- **Configure CORS properly** - restrict origins in production
+- **Enable HTTPS security headers** in production (SECURE_* settings)
+- **Use secure database connections** with proper authentication
+- **Regularly update dependencies** to patch security vulnerabilities
+- **Monitor application logs** for suspicious activity
+- **Implement rate limiting** for API endpoints in production
 
 ### Production Deployment
 

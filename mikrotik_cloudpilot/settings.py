@@ -13,20 +13,26 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6v84-@7sl$q=9#2w+my5^zs&6gtou3n73y$5x=3iapv#-b8xbm'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-6v84-@7sl$q=9#2w+my5^zs&6gtou3n73y$5x=3iapv#-b8xbm')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 # Application definition
@@ -53,9 +59,12 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.openapi.AutoSchema',
 }
 
+# JWT Settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=600),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=int(os.environ.get('JWT_ACCESS_TOKEN_LIFETIME_MINUTES', 600))),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=int(os.environ.get('JWT_REFRESH_TOKEN_LIFETIME_DAYS', 1))),
+    'SIGNING_KEY': os.environ.get('JWT_SIGNING_KEY', SECRET_KEY),
+    'ALGORITHM': os.environ.get('JWT_ALGORITHM', 'HS256'),
 }
 
 MIDDLEWARE = [
@@ -94,12 +103,22 @@ WSGI_APPLICATION = 'mikrotik_cloudpilot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Database configuration
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': os.environ.get('DATABASE_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.environ.get('DATABASE_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': os.environ.get('DATABASE_USER', ''),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
+        'HOST': os.environ.get('DATABASE_HOST', ''),
+        'PORT': os.environ.get('DATABASE_PORT', ''),
     }
 }
+
+# Use dj-database-url for production (e.g., Render, Heroku)
+if os.environ.get('DATABASE_URL'):
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.parse(os.environ.get('DATABASE_URL'))
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -132,11 +151,25 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Security Settings
+SECURE_BROWSER_XSS_FILTER = os.environ.get('SECURE_BROWSER_XSS_FILTER', 'True').lower() == 'true'
+SECURE_CONTENT_TYPE_NOSNIFF = os.environ.get('SECURE_CONTENT_TYPE_NOSNIFF', 'True').lower() == 'true'
+X_FRAME_OPTIONS = os.environ.get('X_FRAME_OPTIONS', 'DENY')
+SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', 0))  # 0 for development, 31536000 for production
+SECURE_HSTS_INCLUDE_SUBDOMAINS = os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'False').lower() == 'true'
+SECURE_HSTS_PRELOAD = os.environ.get('SECURE_HSTS_PRELOAD', 'False').lower() == 'true'
+
+# Session Security
+SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False').lower() == 'true'
+CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'False').lower() == 'true'
+SESSION_COOKIE_HTTPONLY = os.environ.get('SESSION_COOKIE_HTTPONLY', 'True').lower() == 'true'
+CSRF_COOKIE_HTTPONLY = os.environ.get('CSRF_COOKIE_HTTPONLY', 'True').lower() == 'true'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+STATIC_ROOT = os.environ.get('STATIC_ROOT', BASE_DIR / 'staticfiles')
 
 # Additional static files directories
 STATICFILES_DIRS = [
@@ -157,18 +190,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS settings for interactive Swagger (MkDocs on :8001) and login pages
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8001',
-    'http://localhost:8001',
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-]
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://127.0.0.1:8001,http://localhost:8001,http://127.0.0.1:8000,http://localhost:8000').split(',')
 
 # Allow requests from file:// protocol (local HTML files)
-CORS_ALLOW_ALL_ORIGINS = True  # For development only - restrict in production
+CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True').lower() == 'true'  # For development only - restrict in production
 
 # Allow credentials
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = os.environ.get('CORS_ALLOW_CREDENTIALS', 'True').lower() == 'true'
 
 # Allow common headers
 CORS_ALLOW_HEADERS = [
@@ -196,6 +224,6 @@ CORS_ALLOW_METHODS = [
 
 # Encryption key for router passwords
 # Generate a new key with: python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
-ENCRYPTION_KEY = b'6WfDngP4K_1pEDVef5h59ANAnhhq9bZzakrAKqYugHQ='  # Replace with actual generated key
+ENCRYPTION_KEY = os.environ.get('ENCRYPTION_KEY', '6WfDngP4K_1pEDVef5h59ANAnhhq9bZzakrAKqYugHQ=').encode()
 
 
