@@ -4,6 +4,7 @@ use_directory_urls: false  # This will help with asset paths
 theme:
   name: material
   language: en
+  logo: assets/logo.png
   icon:
     previous: fontawesome/solid/angle-left
     next: fontawesome/solid/angle-right
@@ -31,13 +32,13 @@ theme:
       accent: indigo
 
 nav:
-  - Overview: index.md
-  - Setup Guide: setup-guide.md
-  - Authentication: authentication.md
-  - Routers API:
+  - 📖   Overview: index.md
+  - 🛠️   Setup Guide: setup-guide.md
+  - 🔐   Authentication: authentication.md
+  - 📡   Routers API:
     - Router API: router-api.md
     - Package Management: packages.md
-  - Payments API :
+  - 💳   Payments API :
     - Payment Credentials: payment-credentials.md
     - Payment Transactions: payment-transactions.md
     - IntaSend Integration: intasend-payments.md

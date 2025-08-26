@@ -57,16 +57,6 @@ A Django-based API for managing Mikrotik routers with user authentication, secur
 - **Production Ready**: Deployed at https://mikrotik-cloudpilotapi.onrender.com/
 - **Documentation**: Available at https://mikrotik-cloudpilotapi.onrender.com/docs/
 
-## 📖 Documentation Sections
-
-- **[Setup Guide](https://mikrotik-cloudpilotapi.onrender.com/docs/setup-guide/)**: Complete installation and configuration
-- **[Authentication](https://mikrotik-cloudpilotapi.onrender.com/docs/authentication/)**: JWT and API key authentication details
-- **[Router API](https://mikrotik-cloudpilotapi.onrender.com/docs/router-api/)**: Complete router management API reference
-- **[Package Management](https://mikrotik-cloudpilotapi.onrender.com/docs/packages/)**: WiFi package creation and management
-- **[Payment Credentials](https://mikrotik-cloudpilotapi.onrender.com/docs/payment-credentials/)**: Secure payment provider integration
-- **[IntaSend Integration](https://mikrotik-cloudpilotapi.onrender.com/docs/intasend-payments/)**: M-Pesa payment processing
-- **[Mikrotik Integration](https://mikrotik-cloudpilotapi.onrender.com/docs/mikrotik-integration/)**: Hotspot and login page setup
-- **[API Reference](https://mikrotik-cloudpilotapi.onrender.com/docs/api-reference/)**: Quick reference guide for API endpoints
 
 ## 🔒 Security Features
 
@@ -164,7 +154,7 @@ This project is designed with a clean, maintainable architecture. Key design pri
 
 ## 📄 License
 
-See [LICENSE](LICENSE) file for details.
+See [LICENSE](LICENSE) file for details. This project is licensed under the Apache License, Version 2.0.
 
 ---
 

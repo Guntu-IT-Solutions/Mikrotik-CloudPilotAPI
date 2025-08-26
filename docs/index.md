@@ -194,7 +194,7 @@ This project is designed with maintainability in mind. Key areas for contributio
 
 ## 📄 License
 
-See [LICENSE](../../LICENSE) file for details.
+See [LICENSE](../../LICENSE) file for details. This project is licensed under the Apache License, Version 2.0.
 
 ---
 
