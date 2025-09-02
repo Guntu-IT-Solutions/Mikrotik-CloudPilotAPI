@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, FileResponse
 from django.conf import settings
+from django.utils import timezone
+from django.db import connection
+from django.core.cache import cache
 import os
+import psutil
+import platform
 
 def serve_docs(request, path=''):
     """
@@ -83,3 +88,100 @@ def docs_home(request):
     Serve the main documentation page.
     """
     return serve_docs(request, 'index.html')
+
+def health_check(request):
+    """
+    Health check endpoint for monitoring server status.
+    Returns server health information including database connectivity,
+    system resources, and application status.
+    """
+    try:
+        # Check database connectivity
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+            db_status = "healthy"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+    
+    # Check cache connectivity
+    try:
+        cache.set('health_check_test', 'ok', 10)
+        cache_status = "healthy" if cache.get('health_check_test') == 'ok' else "error"
+    except Exception as e:
+        cache_status = f"error: {str(e)}"
+    
+    # Get system information
+    try:
+        cpu_percent = psutil.cpu_percent(interval=1)
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage('/')
+        
+        system_info = {
+            "cpu_percent": cpu_percent,
+            "memory_percent": memory.percent,
+            "memory_available_gb": round(memory.available / (1024**3), 2),
+            "disk_percent": disk.percent,
+            "disk_free_gb": round(disk.free / (1024**3), 2),
+            "platform": platform.system(),
+            "python_version": platform.python_version(),
+        }
+    except Exception as e:
+        system_info = {"error": str(e)}
+    
+    # Get application information
+    import django
+    app_info = {
+        "django_version": django.get_version(),
+        "debug_mode": settings.DEBUG,
+        "timezone": str(timezone.now().tzinfo),
+        "current_time": timezone.now().isoformat(),
+        "allowed_hosts": settings.ALLOWED_HOSTS,
+    }
+    
+    # Determine overall health status
+    overall_status = "healthy"
+    if db_status != "healthy" or cache_status != "healthy":
+        overall_status = "degraded"
+    
+    if "error" in str(system_info):
+        overall_status = "degraded"
+    
+    # Prepare response
+    health_data = {
+        "status": overall_status,
+        "timestamp": timezone.now().isoformat(),
+        "database": db_status,
+        "cache": cache_status,
+        "system": system_info,
+        "application": app_info,
+    }
+    
+    # Return appropriate HTTP status code
+    if overall_status == "healthy":
+        status_code = 200
+    elif overall_status == "degraded":
+        status_code = 200  # Still operational but with issues
+    else:
+        status_code = 503  # Service unavailable
+    
+    # Check if client wants JSON response
+    if request.META.get('HTTP_ACCEPT', '').find('application/json') != -1:
+        import json
+        return HttpResponse(
+            json.dumps(health_data, indent=2),
+            content_type='application/json',
+            status=status_code
+        )
+    else:
+        # Return plain text response for simple monitoring
+        return HttpResponse(
+            f"Health Check: {overall_status.upper()}\n\n" +
+            f"Database: {db_status}\n" +
+            f"Cache: {cache_status}\n" +
+            f"CPU: {system_info.get('cpu_percent', 'N/A')}%\n" +
+            f"Memory: {system_info.get('memory_percent', 'N/A')}%\n" +
+            f"Disk: {system_info.get('disk_percent', 'N/A')}%\n" +
+            f"Time: {app_info['current_time']}\n",
+            content_type='text/plain',
+            status=status_code
+        )

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import serve_docs, docs_home
+from .views import serve_docs, docs_home, health_check
 
 
 schema_title = "Mikrotik CloudPilot API"
@@ -29,6 +29,9 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('routers/', include('routers.urls')),
     path('payments/', include('payments.urls')),
+    
+    # Health check endpoint for monitoring
+    path('health/', health_check, name='health_check'),
     
     # Documentation routes - serve docs at root for proper asset paths
     path('', docs_home, name='docs_home'),
