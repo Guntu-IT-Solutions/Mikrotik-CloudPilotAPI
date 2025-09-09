@@ -20,6 +20,7 @@ python manage.py collectstatic --no-input
 
 # Apply any outstanding database migrations
 echo "Running database migrations..."
+python manage.py makemigrations
 python manage.py migrate
 
 # Create a super user (optional - comment out if not needed)
