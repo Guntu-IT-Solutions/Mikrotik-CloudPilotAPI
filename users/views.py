@@ -6,12 +6,14 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from .serializers import RegisterSerializer, APIKeySerializer
 from .models import APIKey, UserProfile
 from routers.authentication import validate_api_keys
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 @api_view(['POST'])
+@csrf_exempt
 def register(request):
     """Register a new user."""
     serializer = RegisterSerializer(data=request.data)
@@ -45,6 +47,7 @@ def register(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
+@csrf_exempt
 def login(request):
     """Login user and return JWT tokens."""
     username = request.data.get('username')
