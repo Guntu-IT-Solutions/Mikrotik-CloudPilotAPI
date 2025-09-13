@@ -22,6 +22,33 @@ class APIKey(models.Model):
             defaults={'public_key': public, 'private_key_hash': private_hash}
         )
         return public, private  # return plain private so user can see it once
+    
+    @classmethod
+    def create_custom_for_user(cls, user, public_key, private_key):
+        """Create API keys with custom values provided by user"""
+        # Validate key lengths
+        if len(public_key) != 64:  # 32 bytes = 64 hex chars
+            raise ValueError("Public key must be exactly 64 characters (32 bytes)")
+        if len(private_key) != 128:  # 64 bytes = 128 hex chars
+            raise ValueError("Private key must be exactly 128 characters (64 bytes)")
+        
+        # Validate hex format
+        try:
+            int(public_key, 16)
+            int(private_key, 16)
+        except ValueError:
+            raise ValueError("Keys must be valid hexadecimal strings")
+        
+        # Check if public key already exists
+        if cls.objects.filter(public_key=public_key).exists():
+            raise ValueError("This public key is already in use")
+        
+        private_hash = hashlib.sha256(private_key.encode()).hexdigest()
+        instance, _ = cls.objects.update_or_create(
+            user=user,
+            defaults={'public_key': public_key, 'private_key_hash': private_hash}
+        )
+        return public_key, private_key
 
 class UserProfile(models.Model):
     """

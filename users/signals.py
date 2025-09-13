@@ -7,4 +7,8 @@ from .models import APIKey
 def create_user_api_keys(sender, instance, created, **kwargs):
     """Automatically create API keys when a new user is created."""
     if created:
-        APIKey.create_for_user(instance)
+        try:
+            APIKey.create_for_user(instance)
+        except Exception as e:
+            # Log the error but don't fail user creation
+            print(f"Failed to create API keys for user {instance.username}: {e}")

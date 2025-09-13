@@ -25,3 +25,37 @@ class APIKeySerializer(serializers.ModelSerializer):
         fields = ['public_key', 'created_at']
         read_only_fields = fields
 
+class CustomAPIKeySerializer(serializers.Serializer):
+    public_key = serializers.CharField(max_length=64, min_length=64)
+    private_key = serializers.CharField(max_length=128, min_length=128)
+    
+    def validate_public_key(self, value):
+        """Validate public key format"""
+        if len(value) != 64:
+            raise serializers.ValidationError("Public key must be exactly 64 characters")
+        
+        # Check if it's valid hex
+        try:
+            int(value, 16)
+        except ValueError:
+            raise serializers.ValidationError("Public key must be a valid hexadecimal string")
+        
+        # Check if it's already in use
+        if APIKey.objects.filter(public_key=value).exists():
+            raise serializers.ValidationError("This public key is already in use")
+        
+        return value
+    
+    def validate_private_key(self, value):
+        """Validate private key format"""
+        if len(value) != 128:
+            raise serializers.ValidationError("Private key must be exactly 128 characters")
+        
+        # Check if it's valid hex
+        try:
+            int(value, 16)
+        except ValueError:
+            raise serializers.ValidationError("Private key must be a valid hexadecimal string")
+        
+        return value
+

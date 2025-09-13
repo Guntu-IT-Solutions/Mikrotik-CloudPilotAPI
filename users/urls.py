@@ -9,4 +9,5 @@ urlpatterns = [
     path('api-keys/', views.get_api_keys, name='get-api-keys'),
     path('generate-api-key/', views.generate_api_key, name='generate-api-key'),
     path('rotate-api-keys/', views.rotate_api_keys, name='rotate-api-keys'),
+    path('set-custom-api-keys/', views.set_custom_api_keys, name='set-custom-api-keys'),
 ]

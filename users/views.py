@@ -6,12 +6,14 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from .serializers import RegisterSerializer, APIKeySerializer
+from django.views.decorators.csrf import csrf_exempt
+from .serializers import RegisterSerializer, APIKeySerializer, CustomAPIKeySerializer
 from .models import APIKey, UserProfile
 from routers.authentication import validate_api_keys
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 @api_view(['POST'])
+@csrf_exempt
 def register(request):
     """Register a new user."""
     serializer = RegisterSerializer(data=request.data)
@@ -170,3 +172,34 @@ def rotate_api_keys(request):
         return Response({
             "error": f"Failed to rotate API keys: {str(e)}"
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def set_custom_api_keys(request):
+    """Set custom API keys for the authenticated user"""
+    serializer = CustomAPIKeySerializer(data=request.data)
+    if serializer.is_valid():
+        try:
+            public_key = serializer.validated_data['public_key']
+            private_key = serializer.validated_data['private_key']
+            
+            # Create custom API keys
+            APIKey.create_custom_for_user(request.user, public_key, private_key)
+            
+            return Response({
+                "message": "Custom API keys set successfully",
+                "public_key": public_key,
+                "note": "Your custom API keys are now active"
+            }, status=status.HTTP_201_CREATED)
+            
+        except ValueError as e:
+            return Response({
+                "error": str(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({
+                "error": f"Failed to set custom API keys: {str(e)}"
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
