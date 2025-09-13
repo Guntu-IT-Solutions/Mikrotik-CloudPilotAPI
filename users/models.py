@@ -27,10 +27,10 @@ class APIKey(models.Model):
     def create_custom_for_user(cls, user, public_key, private_key):
         """Create API keys with custom values provided by user"""
         # Validate key lengths
-        if len(public_key) != 64:  # 32 bytes = 64 hex chars
-            raise ValueError("Public key must be exactly 64 characters (32 bytes)")
-        if len(private_key) != 128:  # 64 bytes = 128 hex chars
-            raise ValueError("Private key must be exactly 128 characters (64 bytes)")
+        if len(public_key) != 32:  # 16 bytes = 32 hex chars
+            raise ValueError("Public key must be exactly 32 characters (16 bytes)")
+        if len(private_key) != 64:  # 32 bytes = 64 hex chars
+            raise ValueError("Private key must be exactly 64 characters (32 bytes)")
         
         # Validate hex format
         try:

@@ -26,13 +26,13 @@ class APIKeySerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 class CustomAPIKeySerializer(serializers.Serializer):
-    public_key = serializers.CharField(max_length=64, min_length=64)
-    private_key = serializers.CharField(max_length=128, min_length=128)
+    public_key = serializers.CharField(max_length=32, min_length=32)
+    private_key = serializers.CharField(max_length=64, min_length=64)
     
     def validate_public_key(self, value):
         """Validate public key format"""
-        if len(value) != 64:
-            raise serializers.ValidationError("Public key must be exactly 64 characters")
+        if len(value) != 32:
+            raise serializers.ValidationError("Public key must be exactly 32 characters")
         
         # Check if it's valid hex
         try:
@@ -48,8 +48,8 @@ class CustomAPIKeySerializer(serializers.Serializer):
     
     def validate_private_key(self, value):
         """Validate private key format"""
-        if len(value) != 128:
-            raise serializers.ValidationError("Private key must be exactly 128 characters")
+        if len(value) != 64:
+            raise serializers.ValidationError("Private key must be exactly 64 characters")
         
         # Check if it's valid hex
         try:
