@@ -115,10 +115,16 @@ DATABASES = {
     }
 }
 
-# Use dj-database-url for production (e.g., Render, Heroku)
+# Use dj-database-url for production (e.g., Render, Heroku, Aiven)
 if os.environ.get('DATABASE_URL'):
     import dj_database_url
     DATABASES['default'] = dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    
+    # Ensure SSL is required for PostgreSQL connections (important for Aiven)
+    if DATABASES['default']['ENGINE'] == 'django.db.backends.postgresql':
+        DATABASES['default']['OPTIONS'] = {
+            'sslmode': 'require',
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
