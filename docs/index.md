@@ -29,7 +29,8 @@ mkdocs serve -a 127.0.0.1:8001
 ## 🏗️ Architecture Overview
 
 ### Database Structure
-- **Single Database**: All data stored in `db.sqlite3`
+- **PostgreSQL Preferred**: Production-ready PostgreSQL database with SSL support
+- **SQLite Fallback**: SQLite for development and testing environments
 - **User Isolation**: Achieved through proper database filtering
 - **Standard Django Patterns**: Uses Django's built-in ForeignKey relationships
 
@@ -160,7 +161,7 @@ curl -X GET http://localhost:8000/routers/1/device-info/ \
 
 ### Technology Stack
 - **Backend**: Django 4.2+ with Django REST Framework
-- **Database**: SQLite with Django ORM
+- **Database**: PostgreSQL (production) / SQLite (development) with Django ORM
 - **Authentication**: JWT + Custom dual API key system
 - **Encryption**: Fernet (cryptography library)
 - **Documentation**: MkDocs with Material theme

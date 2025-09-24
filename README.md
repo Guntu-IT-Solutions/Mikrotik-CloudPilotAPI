@@ -17,7 +17,8 @@ A Django-based API for managing Mikrotik routers with user authentication, secur
 ## 🏗️ Architecture
 
 ### Database Structure
-- **Single Database**: All data stored in the default `db.sqlite3` database
+- **PostgreSQL Preferred**: Production-ready PostgreSQL database with SSL support
+- **SQLite Fallback**: SQLite for development and testing environments
 - **Proper Relationships**: Models use Django ForeignKey relationships for data integrity
 - **User Isolation**: Users can only access their own data through proper filtering
 
@@ -51,7 +52,7 @@ A Django-based API for managing Mikrotik routers with user authentication, secur
 
 ## 🚨 Important Notes
 
-- **Simplified Architecture**: All data stored in a single database with proper relationships
+- **Simplified Architecture**: PostgreSQL database (production) or SQLite (development) with proper relationships
 - **Automatic Setup**: API keys are created automatically when users register
 - **Standard Django Patterns**: Uses Django's built-in ForeignKey relationships
 - **Production Ready**: Deployed at https://mikrotik-cloudpilotapi.onrender.com/

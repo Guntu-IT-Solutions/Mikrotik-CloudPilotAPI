@@ -7,6 +7,7 @@ This guide will walk you through setting up the Mikrotik CloudPilot API on your 
 - Python 3.8 or higher
 - pip (Python package installer)
 - Git
+- PostgreSQL (for production) - SQLite included with Python for development
 
 ## Installation
 
@@ -45,6 +46,18 @@ nano .env  # or use your preferred editor
 | `DEBUG` | Debug mode (True/False) | Set to `True` for development |
 | `ALLOWED_HOSTS` | Allowed domains | `localhost,127.0.0.1` for development |
 
+**Database Configuration:**
+
+| Variable | Purpose | Development | Production |
+|----------|---------|-------------|------------|
+| `DATABASE_URL` | Database connection string | SQLite (default) | PostgreSQL connection |
+| `DATABASE_ENGINE` | Database backend | `django.db.backends.sqlite3` | `django.db.backends.postgresql` |
+| `DATABASE_NAME` | Database name | `db.sqlite3` | Your PostgreSQL database |
+| `DATABASE_USER` | Database username | (empty) | PostgreSQL username |
+| `DATABASE_PASSWORD` | Database password | (empty) | PostgreSQL password |
+| `DATABASE_HOST` | Database host | (empty) | PostgreSQL host |
+| `DATABASE_PORT` | Database port | (empty) | PostgreSQL port (usually 5432) |
+
 **Optional Environment Variables:**
 
 | Variable | Purpose | Default |
@@ -53,7 +66,6 @@ nano .env  # or use your preferred editor
 | `JWT_REFRESH_TOKEN_LIFETIME_DAYS` | JWT refresh token lifetime | `1` (1 day) |
 | `JWT_SIGNING_KEY` | JWT signing key | Uses `SECRET_KEY` |
 | `CORS_ALLOWED_ORIGINS` | Allowed CORS origins | Development defaults |
-| `DATABASE_URL` | Production database | SQLite for development |
 
 ### 4. Install Dependencies
 
@@ -61,7 +73,73 @@ nano .env  # or use your preferred editor
 pip install -r requirements.txt
 ```
 
-### 4.1. Security Configuration
+This will install all required packages including:
+- Django and Django REST Framework
+- PostgreSQL driver (`psycopg2-binary`)
+- Database URL parsing (`dj-database-url`)
+- JWT authentication
+- CORS handling
+- Encryption libraries
+
+### 4.1. Database Setup
+
+#### Development (SQLite)
+For development, SQLite is automatically configured and requires no additional setup.
+
+#### Production (PostgreSQL)
+
+**Option 1: Using DATABASE_URL (Recommended)**
+
+Add your PostgreSQL connection string to your `.env` file:
+
+```bash
+# For cloud providers like Aiven, Render, Heroku, etc.
+DATABASE_URL=postgresql://username:password@hostname:port/database_name?sslmode=require
+```
+
+**Option 2: Individual Database Settings**
+
+Configure individual database parameters in your `.env` file:
+
+```bash
+DATABASE_ENGINE=django.db.backends.postgresql
+DATABASE_NAME=your_database_name
+DATABASE_USER=your_username
+DATABASE_PASSWORD=your_password
+DATABASE_HOST=your_host.com
+DATABASE_PORT=5432
+```
+
+**Setting Up PostgreSQL Database:**
+
+1. **Create a PostgreSQL database:**
+   ```sql
+   CREATE DATABASE mikrotik_cloudpilot;
+   CREATE USER cloudpilot_user WITH PASSWORD 'your_secure_password';
+   GRANT ALL PRIVILEGES ON DATABASE mikrotik_cloudpilot TO cloudpilot_user;
+   ```
+
+2. **For Cloud Providers (Aiven, etc.):**
+   - Use the connection string provided by your cloud provider
+   - Ensure SSL is enabled (`sslmode=require`)
+   - The application automatically configures SSL for PostgreSQL connections
+
+3. **Test your database connection:**
+   ```bash
+   python manage.py dbshell
+   ```
+
+**Common PostgreSQL Providers:**
+
+| Provider | Connection Format |
+|----------|------------------|
+| **Aiven** | `postgresql://user:pass@host.aivencloud.com:port/db?sslmode=require` |
+| **Render** | `postgresql://user:pass@host.onrender.com:port/db` |
+| **Heroku** | `postgresql://user:pass@host.herokuapp.com:port/db` |
+| **Railway** | `postgresql://user:pass@host.railway.app:port/db` |
+| **Supabase** | `postgresql://user:pass@host.supabase.co:port/postgres` |
+
+### 4.2. Security Configuration
 
 **Production Security Settings:**
 
@@ -100,7 +178,7 @@ DEBUG=False
 | `ALLOWED_HOSTS` | `localhost,127.0.0.1` | Your domain names |
 | `CORS_ALLOW_ALL_ORIGINS` | `True` | `False` |
 | `SECURE_*` settings | `False` | `True` |
-| `DATABASE` | SQLite | PostgreSQL/MySQL |
+| `DATABASE` | SQLite | PostgreSQL |
 
 ### 5. Generate Encryption Key
 
@@ -159,8 +237,8 @@ CORS_ALLOW_ALL_ORIGINS=False
 CORS_ALLOWED_ORIGINS=https://yourdomain.com,https://api.yourdomain.com
 CORS_ALLOW_CREDENTIALS=True
 
-# Database
-DATABASE_URL=postgresql://user:password@host:port/database
+# Database (PostgreSQL for production)
+DATABASE_URL=postgresql://username:password@hostname:port/database_name?sslmode=require
 
 # JWT
 JWT_ACCESS_TOKEN_LIFETIME_MINUTES=60
@@ -227,10 +305,12 @@ The application uses environment variables for all configuration, making it easy
 
 ### Database Architecture
 
+- **PostgreSQL Preferred**: Production-ready PostgreSQL database with SSL support
+- **SQLite Fallback**: SQLite for development and testing environments
 - **Single Database**: All data stored in the configured database
 - **User Isolation**: Achieved through proper database filtering
 - **Standard Django Patterns**: Uses Django's built-in ForeignKey relationships
-- **Production Ready**: Supports PostgreSQL, MySQL, and other databases
+- **Cloud Provider Ready**: Optimized for cloud PostgreSQL providers (Aiven, Render, Heroku, etc.)
 
 ## Starting the Application
 
@@ -304,7 +384,34 @@ If you see database errors:
 # Check database status
 python manage.py check
 python manage.py showmigrations
+
+# Test PostgreSQL connection
+python manage.py dbshell
+
+# Check if PostgreSQL service is running (local)
+sudo systemctl status postgresql
 ```
+
+**Common PostgreSQL Issues:**
+
+1. **Connection refused:**
+   - Check if PostgreSQL service is running
+   - Verify host and port settings
+   - Ensure firewall allows connections
+
+2. **Authentication failed:**
+   - Verify username and password
+   - Check if user has proper permissions
+   - Ensure database exists
+
+3. **SSL connection required:**
+   - Add `?sslmode=require` to DATABASE_URL
+   - The application automatically configures SSL for PostgreSQL
+
+4. **Database does not exist:**
+   ```sql
+   CREATE DATABASE your_database_name;
+   ```
 
 #### 3. Encryption Errors
 
