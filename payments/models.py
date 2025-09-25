@@ -60,7 +60,16 @@ class PaymentCredentials(models.Model):
         
         try:
             fernet = self._get_fernet()
-            decrypted_data = fernet.decrypt(self.encrypted_private_key)
+            
+            # Convert memoryview to bytes if needed (PostgreSQL returns memoryview)
+            encrypted_data = self.encrypted_private_key
+            if isinstance(encrypted_data, memoryview):
+                encrypted_data = bytes(encrypted_data)
+            elif isinstance(encrypted_data, str):
+                # Handle case where data might be stored as string
+                encrypted_data = encrypted_data.encode('utf-8')
+            
+            decrypted_data = fernet.decrypt(encrypted_data)
             return decrypted_data.decode()
         except Exception as e:
             raise ValueError(f"Failed to decrypt private key: {e}")
